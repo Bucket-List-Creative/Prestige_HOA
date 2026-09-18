@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "sanity:typegen": "sanity schema extract --force && sanity typegen generate",
     "sanity:deploy": "sanity deploy",
-    "sanity:seed": "sanity exec scripts/seed.ts --with-user-token"
+    "sanity:seed": "sanity exec scripts/seed.ts --with-user-token",
+    "icons": "node scripts/build-icons.mjs"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",

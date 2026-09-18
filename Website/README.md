@@ -69,6 +69,11 @@ npm run sanity:typegen
 Component classes (`.btn`, `.input`, `.card`, `.table`, `.framed`, `.kicker`)
 match the original's markup so sections port one-to-one.
 
+The tab icon is the gold **P** monogram cropped out of `public/images/logo.png`
+by `scripts/build-icons.mjs`, which keys the glyph off its navy ground and
+writes `src/app/icon.png` (32px), `icon1.png` (512px) and `apple-icon.png`
+(180px). Re-run `npm run icons` if the logo changes.
+
 `src/components/Motion.tsx` reproduces the scroll/pointer parallax and the
 scroll-reveal. Elements are only hidden once it runs, and it no-ops under
 `prefers-reduced-motion`.
@@ -96,3 +101,4 @@ These were placeholders in the prototype and remain so:
 | `npm run sanity:typegen` | Regenerate `sanity.types.ts` from the schema |
 | `npm run sanity:seed` | Push `defaults.ts` into the dataset |
 | `npm run sanity:deploy` | Deploy the Studio to sanity.studio |
+| `npm run icons` | Regenerate the tab icons from the logo |
