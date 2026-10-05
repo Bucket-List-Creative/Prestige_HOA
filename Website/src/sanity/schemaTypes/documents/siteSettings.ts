@@ -31,6 +31,19 @@ export const siteSettings = defineType({
       group: 'brand',
     }),
     defineField({
+      name: 'phone',
+      type: 'string',
+      group: 'brand',
+    }),
+    defineField({
+      name: 'mailingAddress',
+      title: 'Mailing address',
+      description: 'One line per row.',
+      type: 'text',
+      rows: 3,
+      group: 'brand',
+    }),
+    defineField({
       name: 'contactNote',
       title: 'Contact note',
       type: 'string',

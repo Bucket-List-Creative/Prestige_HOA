@@ -20,6 +20,8 @@ export const siteContentQuery = defineQuery(`{
     logo${img},
     tagline,
     conciergeEmail,
+    phone,
+    mailingAddress,
     contactNote,
     primaryNav[]{label, href},
     headerCta{label, href},
@@ -103,6 +105,7 @@ export const siteContentQuery = defineQuery(`{
     aside,
     requestTypes[]{term, text},
     schemaNote,
+    payment{kicker, title, body, linkLabel, pendingNote, url},
     groups[]{
       label,
       fields[]{id, label, kind, placeholder, options, full, required}

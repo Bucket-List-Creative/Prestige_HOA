@@ -63,6 +63,8 @@ async function main() {
       logo: await image(settings.logo),
       tagline: settings.tagline,
       conciergeEmail: settings.conciergeEmail,
+      phone: settings.phone,
+      mailingAddress: settings.mailingAddress,
       contactNote: settings.contactNote,
       primaryNav: keyed(settings.primaryNav, 'nav'),
       headerCta: settings.headerCta,

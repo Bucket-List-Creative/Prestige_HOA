@@ -40,6 +40,9 @@ export type SiteSettings = {
   secureNote: string
   copyright: string
   conciergeEmail: string
+  phone: string
+  /** One line per row, e.g. name, PO box, city/state/ZIP. */
+  mailingAddress: string
   contactNote: string
 }
 
@@ -171,6 +174,15 @@ export type TitleCompanyContent = {
   aside: string
   requestTypes: { term: string; text: string }[]
   schemaNote: string
+  payment: {
+    kicker: string
+    title: string
+    body: string
+    linkLabel: string
+    pendingNote: string
+    /** A Stripe Payment Link (https://buy.stripe.com/…). The button is disabled until set. */
+    url?: string
+  }
   groups: { label: string; fields: TitleFormField[] }[]
   submitLabel: string
   submitNote: string

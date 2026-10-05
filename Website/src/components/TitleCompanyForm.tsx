@@ -1,8 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { startTransition, useActionState, useState } from 'react'
 
+import { submitTitleRequest } from '@/app/actions/forms'
 import type { TitleCompanyContent, TitleFormField } from '@/content/types'
+import { initialFormState, type FormState } from '@/lib/form-state'
+
+import { Captcha, Honeypot } from './Captcha'
+import { ClosingPacketPayment } from './ClosingPacketPayment'
 
 function Field({ field }: { field: TitleFormField }) {
   const shared = {
@@ -49,16 +54,46 @@ function Field({ field }: { field: TitleFormField }) {
 
 /**
  * The closing-request form. Field groups come from Sanity, so the schema can
- * change without a deploy. Submission is not yet wired to an endpoint.
+ * change without a deploy. Submissions go to the Jotform "Title Company
+ * Request" form through a Server Action; see `src/app/actions/forms.ts` for
+ * the field mapping.
  */
 export function TitleCompanyForm({
   content,
 }: {
   content: TitleCompanyContent
 }) {
-  const [sent, setSent] = useState(false)
+  // Bumped by "Submit another request" to remount with a fresh form state.
+  const [attempt, setAttempt] = useState(0)
 
-  if (sent) {
+  return (
+    <RequestForm
+      key={attempt}
+      content={content}
+      onReset={() => setAttempt((n) => n + 1)}
+    />
+  )
+}
+
+function RequestForm({
+  content,
+  onReset,
+}: {
+  content: TitleCompanyContent
+  onReset: () => void
+}) {
+  const [captchaKey, setCaptchaKey] = useState(0)
+  const [state, submit, pending] = useActionState(
+    async (prev: FormState, data: FormData) => {
+      const next = await submitTitleRequest(prev, data)
+      // hCaptcha tokens are single use.
+      setCaptchaKey((n) => n + 1)
+      return next
+    },
+    initialFormState
+  )
+
+  if (state.status === 'sent') {
     return (
       <div
         className="col-main"
@@ -87,7 +122,7 @@ export function TitleCompanyForm({
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() => setSent(false)}
+          onClick={onReset}
           style={{
             justifyContent: 'flex-start',
             alignSelf: 'flex-start',
@@ -96,6 +131,9 @@ export function TitleCompanyForm({
         >
           {content.sent.resetLabel}
         </button>
+        <div style={{ maxWidth: 480, marginTop: 12 }}>
+          <ClosingPacketPayment payment={content.payment} />
+        </div>
       </div>
     )
   }
@@ -104,7 +142,8 @@ export function TitleCompanyForm({
     <form
       onSubmit={(event) => {
         event.preventDefault()
-        setSent(true)
+        const data = new FormData(event.currentTarget)
+        startTransition(() => submit(data))
       }}
       className="col-main"
       style={{
@@ -138,6 +177,10 @@ export function TitleCompanyForm({
           ))}
         </fieldset>
       ))}
+      <Honeypot />
+      <div style={{ paddingTop: 28 }}>
+        <Captcha resetKey={captchaKey} />
+      </div>
       <div
         style={{
           display: 'flex',
@@ -150,12 +193,18 @@ export function TitleCompanyForm({
         <button
           type="submit"
           className="btn btn-primary"
+          disabled={pending}
           style={{ justifyContent: 'flex-start', padding: '14px 22px' }}
         >
-          {content.submitLabel}
+          {pending ? 'Sending…' : content.submitLabel}
         </button>
         <span style={{ fontSize: 12, opacity: 0.7 }}>{content.submitNote}</span>
       </div>
+      {state.status === 'error' ? (
+        <p role="alert" style={{ margin: '16px 0 0', fontSize: 13, color: 'var(--color-accent)' }}>
+          {state.message}
+        </p>
+      ) : null}
     </form>
   )
 }

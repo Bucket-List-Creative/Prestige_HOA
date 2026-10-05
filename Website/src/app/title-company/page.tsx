@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+import { ClosingPacketPayment } from '@/components/ClosingPacketPayment'
 import { Heading } from '@/components/Heading'
 import { TitleCompanyForm } from '@/components/TitleCompanyForm'
 import { getSiteContent } from '@/sanity/lib/content'
@@ -88,6 +89,7 @@ export default async function TitleCompanyPage() {
               </div>
             ))}
           </div>
+          <ClosingPacketPayment payment={titleCompany.payment} />
           <span className="tag tag-outline" style={{ alignSelf: 'flex-start' }}>
             {titleCompany.schemaNote}
           </span>

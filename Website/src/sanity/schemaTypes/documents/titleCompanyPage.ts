@@ -21,6 +21,36 @@ export const titleCompanyPage = defineType({
     }),
     defineField({ name: 'schemaNote', type: 'string', group: 'intro' }),
     defineField({
+      name: 'payment',
+      title: 'Closing packet payment',
+      type: 'object',
+      group: 'intro',
+      fields: [
+        defineField({ name: 'kicker', type: 'string' }),
+        defineField({ name: 'title', type: 'string' }),
+        defineField({ name: 'body', type: 'text', rows: 3 }),
+        defineField({ name: 'linkLabel', type: 'string' }),
+        defineField({
+          name: 'pendingNote',
+          description: 'Shown while no payment link is set.',
+          type: 'string',
+        }),
+        defineField({
+          name: 'url',
+          title: 'Stripe payment link',
+          description:
+            'The public Payment Link (https://buy.stripe.com/…), not a dashboard.stripe.com URL.',
+          type: 'url',
+          validation: (rule) =>
+            rule.custom((value?: string) =>
+              value && value.includes('dashboard.stripe.com')
+                ? 'Dashboard links only work for you while logged in. Use the Payment Link instead.'
+                : true
+            ),
+        }),
+      ],
+    }),
+    defineField({
       name: 'groups',
       title: 'Field groups',
       type: 'array',

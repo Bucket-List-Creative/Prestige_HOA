@@ -1,25 +1,50 @@
 'use client'
 
-import { useState } from 'react'
+import { startTransition, useActionState, useRef, useState } from 'react'
 
+import { submitContact } from '@/app/actions/forms'
 import type { ContactContent } from '@/content/types'
+import { initialFormState, type FormState } from '@/lib/form-state'
+
+import { Captcha, Honeypot } from './Captcha'
 
 /**
  * Concierge contact form. Picking an audience re-labels the property field and
- * swaps the routing hint. Submission is not yet wired to an endpoint.
+ * swaps the routing hint. Submissions go to the Jotform "Concierge Contact"
+ * form through a Server Action.
  */
 export function ContactForm({ content }: { content: ContactContent }) {
   const [who, setWho] = useState(content.audiences[0]?.value ?? 'homeowner')
   const [status, setStatus] = useState('')
+  const [captchaKey, setCaptchaKey] = useState(0)
+  const form = useRef<HTMLFormElement>(null)
+  const [, submit, pending] = useActionState(
+    async (prev: FormState, data: FormData) => {
+      const next = await submitContact(prev, data)
+      // hCaptcha tokens are single use.
+      setCaptchaKey((n) => n + 1)
+      if (next.status === 'sent') {
+        form.current?.reset()
+        setStatus(content.sentMessage)
+      } else {
+        setStatus(next.message ?? '')
+      }
+      return next
+    },
+    initialFormState
+  )
 
   const audience =
     content.audiences.find((item) => item.value === who) ?? content.audiences[0]
 
   return (
     <form
+      ref={form}
       onSubmit={(event) => {
         event.preventDefault()
-        setStatus(content.sentMessage)
+        const data = new FormData(event.currentTarget)
+        setStatus('')
+        startTransition(() => submit(data))
       }}
       className="col-main"
       style={{
@@ -108,6 +133,9 @@ export function ContactForm({ content }: { content: ContactContent }) {
         />
       </div>
 
+      <Honeypot />
+      <Captcha resetKey={captchaKey} />
+
       <div
         style={{
           display: 'flex',
@@ -119,9 +147,10 @@ export function ContactForm({ content }: { content: ContactContent }) {
         <button
           type="submit"
           className="btn btn-primary"
+          disabled={pending}
           style={{ justifyContent: 'flex-start', padding: '14px 22px' }}
         >
-          {content.submitLabel}
+          {pending ? 'Sending…' : content.submitLabel}
         </button>
         <span role="status" style={{ fontSize: 13, opacity: 0.75 }}>
           {status}

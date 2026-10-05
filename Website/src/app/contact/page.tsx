@@ -57,13 +57,26 @@ export default async function ContactPage() {
             <div className="eyebrow">{contact.directLabel}</div>
             <a
               className="underline-link"
+              href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}
+            >
+              {settings.phone}
+            </a>
+            <a
+              className="underline-link"
               href={`mailto:${settings.conciergeEmail}`}
             >
               {settings.conciergeEmail}
             </a>
-            <span style={{ opacity: 0.6, fontSize: 12 }}>
-              {contact.directNote}
-            </span>
+            <address
+              style={{ fontStyle: 'normal', whiteSpace: 'pre-line', marginTop: 8 }}
+            >
+              {settings.mailingAddress}
+            </address>
+            {contact.directNote ? (
+              <span style={{ opacity: 0.6, fontSize: 12 }}>
+                {contact.directNote}
+              </span>
+            ) : null}
           </div>
         </div>
 

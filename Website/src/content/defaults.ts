@@ -81,7 +81,9 @@ const settings: SiteSettings = {
     'Payments processed by an encrypted payment partner. Card details are never stored by Prestige HOA.',
   copyright: '© 2026 Prestige HOA',
   conciergeEmail: 'concierge@prestigehoa.example',
-  contactNote: 'Phone and mailing address to be supplied',
+  phone: '636-399-1058',
+  mailingAddress: 'Prestige HOA\nPO Box 163\nChesterfield, MO 63006',
+  contactNote: '',
 }
 
 const home: HomeContent = {
@@ -171,7 +173,7 @@ const home: HomeContent = {
           },
           {
             title: 'Request information',
-            detail: 'Balance, status, or full closing packet.',
+            detail: 'One all-inclusive closing packet, paid online.',
           },
           {
             title: 'Receive the HOA response',
@@ -290,7 +292,7 @@ const payments: PaymentsContent = {
       bullets: [
         'Request HOA information',
         'Submit title and property details',
-        'Request balance or status',
+        'Pay for the closing packet online',
       ],
       linkLabel: 'Enter Title Company Portal',
       href: '/title-company',
@@ -342,13 +344,22 @@ const titleCompany: TitleCompanyContent = {
   },
   heading: { lead: 'Request HOA', em: 'information.', rest: '' },
   aside:
-    'Submit the property and closing details below. Balance letters, status confirmations and closing documentation are returned to the contact on file, target within 24 hours.',
+    'Submit the property and closing details below and pay the closing packet fee online. The packet is returned to the contact on file, target within 24 hours.',
   requestTypes: [
-    { term: 'Balance request', text: 'Payoff / outstanding dues' },
-    { term: 'Status letter', text: 'Good-standing confirmation' },
-    { term: 'Closing packet', text: 'Full documentation' },
+    { term: 'Closing packet', text: 'All-inclusive' },
+    { term: 'Payoff balance', text: 'Included' },
+    { term: 'Status letter', text: 'Included' },
+    { term: 'Closing documentation', text: 'Included' },
   ],
   schemaNote: 'Field schema configurable, pending client confirmation',
+  payment: {
+    kicker: 'Closing packet fee',
+    title: 'Pay securely online.',
+    body: 'Title companies pay the closing packet fee through our secure Stripe checkout. Include the property address so we can match your payment to the request.',
+    linkLabel: 'Pay for closing packet ↗',
+    pendingNote: 'Online payment link coming soon.',
+    url: 'https://buy.stripe.com/5kQeVc5N8781bOm3su9EI00',
+  },
   groups: [
     {
       label: 'Title company',
@@ -426,12 +437,7 @@ const titleCompany: TitleCompanyContent = {
           id: 'tc-request',
           label: 'Request type',
           kind: 'select',
-          options: [
-            'Balance / payoff request',
-            'Status letter',
-            'Full closing packet',
-            'Other',
-          ],
+          options: ['Full closing packet', 'Other / question'],
         },
       ],
     },
@@ -449,10 +455,11 @@ const titleCompany: TitleCompanyContent = {
     },
   ],
   submitLabel: 'Submit request',
-  submitNote: 'No payment information is collected here.',
+  submitNote:
+    'No card details are collected here. Pay the packet fee through the secure Stripe link.',
   sent: {
     heading: 'Request received.',
-    body: 'A confirmation will follow to the contact provided. Submission endpoint to be connected.',
+    body: 'A confirmation will follow to the contact provided. If you have not paid the closing packet fee yet, you can do so below.',
     resetLabel: 'Submit another request',
   },
 }
@@ -463,7 +470,7 @@ const contact: ContactContent = {
   aside:
     "A named member of our team reads every message. Tell us who you are and we'll route it to the right desk.",
   directLabel: 'Direct',
-  directNote: 'Phone and mailing address to be supplied',
+  directNote: '',
   audiences: [
     {
       value: 'homeowner',
@@ -486,7 +493,7 @@ const contact: ContactContent = {
   ],
   submitLabel: 'Send to concierge',
   sentMessage:
-    'Received. A concierge will reply shortly. (Endpoint to be connected.)',
+    'Received. A concierge will reply shortly.',
 }
 
 export const defaultContent: SiteContent = {

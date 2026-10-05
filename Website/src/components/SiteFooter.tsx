@@ -54,6 +54,22 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           fontWeight: 300,
         }}
       >
+        <span className="eyebrow">Contact</span>
+        <a href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}>
+          {settings.phone}
+        </a>
+        <address style={{ fontStyle: 'normal', whiteSpace: 'pre-line' }}>
+          {settings.mailingAddress}
+        </address>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+          fontWeight: 300,
+        }}
+      >
         <span className="eyebrow">Secure</span>
         <span>{settings.secureNote}</span>
         <span style={{ opacity: 0.6, marginTop: 8 }}>{settings.copyright}</span>
