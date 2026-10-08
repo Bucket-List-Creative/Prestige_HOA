@@ -1,7 +1,7 @@
-import Link from 'next/link'
 
 import { Brand } from './Brand'
 import type { Link as LinkType, SiteSettings } from '@/content/types'
+import { SiteLink } from '@/components/SiteLink'
 
 function FooterNav({
   label,
@@ -17,9 +17,9 @@ function FooterNav({
     >
       <span className="eyebrow">{label}</span>
       {links.map((link) => (
-        <Link key={`${link.href}-${link.label}`} href={link.href}>
+        <SiteLink key={`${link.href}-${link.label}`} href={link.href}>
           {link.label}
-        </Link>
+        </SiteLink>
       ))}
     </nav>
   )

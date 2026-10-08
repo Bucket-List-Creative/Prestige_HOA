@@ -132,42 +132,6 @@ export type TitleCompanyPage = {
   };
 };
 
-export type HomeownerPage = {
-  _id: string;
-  _type: "homeownerPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  kicker?: string;
-  crossLink?: Link;
-  heading?: SplitHeading;
-  steps?: Array<
-    {
-      _key: string;
-    } & Step
-  >;
-  step1?: {
-    heading?: string;
-    submitLabel?: string;
-  };
-  step2?: {
-    heading?: string;
-    pendingNote?: string;
-    integrationNote?: string;
-    continueLabel?: string;
-  };
-  step3?: {
-    heading?: string;
-    body?: string;
-    cardKicker?: string;
-    cardTitle?: string;
-    cardBody?: string;
-    continueLabel?: string;
-    integrationNote?: string;
-    paymentUrl?: string;
-  };
-};
-
 export type PaymentsPage = {
   _id: string;
   _type: "paymentsPage";
@@ -456,7 +420,6 @@ export type AllSanitySchemaTypes =
   | SplitHeading
   | ContactPage
   | TitleCompanyPage
-  | HomeownerPage
   | PaymentsPage
   | AboutPage
   | HomePage
@@ -475,7 +438,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: siteContentQuery
-// Query: {  "settings": *[_id == "siteSettings"][0]{    brandPrimary,    brandSecondary,    logo{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},    tagline,    conciergeEmail,    phone,    mailingAddress,    contactNote,    primaryNav[]{label, href},    headerCta{label, href},    footerSiteLinks[]{label, href},    footerPortalLinks[]{label, href},    secureNote,    copyright  },  "home": *[_id == "homePage"][0]{    hero{      notes,      heading{lead, em, rest},      image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},      panelText,      primaryCta{label, href},      secondaryCta{label, href}    },    intro{kicker, heading{lead, em, rest}, body},    pathways{      heading,      note,      items[]{eyebrow, titleTop, titleBottom, body, linkLabel, href, image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height}}    },    philosophy{      kicker,      heading{lead, em, rest},      image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},      lead,      principles[]{term, text}    },    process{      kicker,      heading{lead, em, rest},      columns[]{label, steps[]{title, detail}}    },    trust{      kicker,      stats[]{value, text},      image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},      quote,      body    },    cta{heading{lead, em, rest}, links[]{label, href, variant}}  },  "about": *[_id == "aboutPage"][0]{    kicker,    heading{lead, em, rest},    image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},    aside,    values[]{kicker, title, body},    closing{heading{lead, em, rest}, links[]{label, href, variant}}  },  "payments": *[_id == "paymentsPage"][0]{    kicker,    heading{lead, em, rest},    intro,    options[]{eyebrow, title, bullets, linkLabel, href, image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height}, variant}  },  "homeowner": *[_id == "homeownerPage"][0]{    kicker,    crossLink{label, href},    heading{lead, em, rest},    steps[]{title, detail},    step1{heading, submitLabel},    step2{heading, pendingNote, integrationNote, continueLabel},    step3{      heading,      body,      cardKicker,      cardTitle,      cardBody,      continueLabel,      integrationNote,      paymentUrl    }  },  "titleCompany": *[_id == "titleCompanyPage"][0]{    kicker,    crossLink{label, href},    heading{lead, em, rest},    aside,    requestTypes[]{term, text},    schemaNote,    payment{kicker, title, body, linkLabel, pendingNote, url},    groups[]{      label,      fields[]{id, label, kind, placeholder, options, full, required}    },    submitLabel,    submitNote,    sent{heading, body, resetLabel}  },  "contact": *[_id == "contactPage"][0]{    kicker,    heading{lead, em, rest},    aside,    directLabel,    directNote,    audiences[]{value, label, hint, propertyLabel},    submitLabel,    sentMessage  }}
+// Query: {  "settings": *[_id == "siteSettings"][0]{    brandPrimary,    brandSecondary,    logo{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},    tagline,    conciergeEmail,    phone,    mailingAddress,    contactNote,    primaryNav[]{label, href},    headerCta{label, href},    footerSiteLinks[]{label, href},    footerPortalLinks[]{label, href},    secureNote,    copyright  },  "home": *[_id == "homePage"][0]{    hero{      notes,      heading{lead, em, rest},      image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},      panelText,      primaryCta{label, href},      secondaryCta{label, href}    },    intro{kicker, heading{lead, em, rest}, body},    pathways{      heading,      note,      items[]{eyebrow, titleTop, titleBottom, body, linkLabel, href, image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height}}    },    philosophy{      kicker,      heading{lead, em, rest},      image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},      lead,      principles[]{term, text}    },    process{      kicker,      heading{lead, em, rest},      columns[]{label, steps[]{title, detail}}    },    trust{      kicker,      stats[]{value, text},      image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},      quote,      body    },    cta{heading{lead, em, rest}, links[]{label, href, variant}}  },  "about": *[_id == "aboutPage"][0]{    kicker,    heading{lead, em, rest},    image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height},    aside,    values[]{kicker, title, body},    closing{heading{lead, em, rest}, links[]{label, href, variant}}  },  "payments": *[_id == "paymentsPage"][0]{    kicker,    heading{lead, em, rest},    intro,    options[]{eyebrow, title, bullets, linkLabel, href, image{  "src": asset->url,  "alt": alt,  "width": asset->metadata.dimensions.width,  "height": asset->metadata.dimensions.height}, variant}  },  "titleCompany": *[_id == "titleCompanyPage"][0]{    kicker,    crossLink{label, href},    heading{lead, em, rest},    aside,    requestTypes[]{term, text},    schemaNote,    payment{kicker, title, body, linkLabel, pendingNote, url},    groups[]{      label,      fields[]{id, label, kind, placeholder, options, full, required}    },    submitLabel,    submitNote,    sent{heading, body, resetLabel}  },  "contact": *[_id == "contactPage"][0]{    kicker,    heading{lead, em, rest},    aside,    directLabel,    directNote,    audiences[]{value, label, hint, propertyLabel},    submitLabel,    sentMessage  }}
 export type SiteContentQueryResult = {
   settings:
     | {
@@ -769,82 +732,6 @@ export type SiteContentQueryResult = {
         }> | null;
       }
     | null;
-  homeowner:
-    | {
-        kicker: null;
-        crossLink: null;
-        heading: null;
-        steps: null;
-        step1: null;
-        step2: null;
-        step3: null;
-      }
-    | {
-        kicker: string | null;
-        crossLink: null;
-        heading: {
-          lead: string | null;
-          em: string | null;
-          rest: string | null;
-        } | null;
-        steps: null;
-        step1: null;
-        step2: null;
-        step3: null;
-      }
-    | {
-        kicker: string | null;
-        crossLink: {
-          label: string | null;
-          href: string | null;
-        } | null;
-        heading: {
-          lead: string | null;
-          em: string | null;
-          rest: string | null;
-        } | null;
-        steps: null;
-        step1: null;
-        step2: null;
-        step3: null;
-      }
-    | {
-        kicker: string | null;
-        crossLink: {
-          label: string | null;
-          href: string | null;
-        } | null;
-        heading: {
-          lead: string | null;
-          em: string | null;
-          rest: string | null;
-        } | null;
-        steps: Array<{
-          title: string | null;
-          detail: string | null;
-        }> | null;
-        step1: {
-          heading: string | null;
-          submitLabel: string | null;
-        } | null;
-        step2: {
-          heading: string | null;
-          pendingNote: string | null;
-          integrationNote: string | null;
-          continueLabel: string | null;
-        } | null;
-        step3: {
-          heading: string | null;
-          body: string | null;
-          cardKicker: string | null;
-          cardTitle: string | null;
-          cardBody: string | null;
-          continueLabel: string | null;
-          integrationNote: string | null;
-          paymentUrl: string | null;
-        } | null;
-      }
-    | null;
   titleCompany:
     | {
         kicker: null;
@@ -862,26 +749,6 @@ export type SiteContentQueryResult = {
     | {
         kicker: string | null;
         crossLink: null;
-        heading: {
-          lead: string | null;
-          em: string | null;
-          rest: string | null;
-        } | null;
-        aside: null;
-        requestTypes: null;
-        schemaNote: null;
-        payment: null;
-        groups: null;
-        submitLabel: null;
-        submitNote: null;
-        sent: null;
-      }
-    | {
-        kicker: string | null;
-        crossLink: {
-          label: string | null;
-          href: string | null;
-        } | null;
         heading: {
           lead: string | null;
           em: string | null;
@@ -1055,7 +922,7 @@ export type SiteContentQueryResult = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '{\n  "settings": *[_id == "siteSettings"][0]{\n    brandPrimary,\n    brandSecondary,\n    logo{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n    tagline,\n    conciergeEmail,\n    phone,\n    mailingAddress,\n    contactNote,\n    primaryNav[]{label, href},\n    headerCta{label, href},\n    footerSiteLinks[]{label, href},\n    footerPortalLinks[]{label, href},\n    secureNote,\n    copyright\n  },\n  "home": *[_id == "homePage"][0]{\n    hero{\n      notes,\n      heading{lead, em, rest},\n      image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n      panelText,\n      primaryCta{label, href},\n      secondaryCta{label, href}\n    },\n    intro{kicker, heading{lead, em, rest}, body},\n    pathways{\n      heading,\n      note,\n      items[]{eyebrow, titleTop, titleBottom, body, linkLabel, href, image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n}}\n    },\n    philosophy{\n      kicker,\n      heading{lead, em, rest},\n      image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n      lead,\n      principles[]{term, text}\n    },\n    process{\n      kicker,\n      heading{lead, em, rest},\n      columns[]{label, steps[]{title, detail}}\n    },\n    trust{\n      kicker,\n      stats[]{value, text},\n      image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n      quote,\n      body\n    },\n    cta{heading{lead, em, rest}, links[]{label, href, variant}}\n  },\n  "about": *[_id == "aboutPage"][0]{\n    kicker,\n    heading{lead, em, rest},\n    image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n    aside,\n    values[]{kicker, title, body},\n    closing{heading{lead, em, rest}, links[]{label, href, variant}}\n  },\n  "payments": *[_id == "paymentsPage"][0]{\n    kicker,\n    heading{lead, em, rest},\n    intro,\n    options[]{eyebrow, title, bullets, linkLabel, href, image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n}, variant}\n  },\n  "homeowner": *[_id == "homeownerPage"][0]{\n    kicker,\n    crossLink{label, href},\n    heading{lead, em, rest},\n    steps[]{title, detail},\n    step1{heading, submitLabel},\n    step2{heading, pendingNote, integrationNote, continueLabel},\n    step3{\n      heading,\n      body,\n      cardKicker,\n      cardTitle,\n      cardBody,\n      continueLabel,\n      integrationNote,\n      paymentUrl\n    }\n  },\n  "titleCompany": *[_id == "titleCompanyPage"][0]{\n    kicker,\n    crossLink{label, href},\n    heading{lead, em, rest},\n    aside,\n    requestTypes[]{term, text},\n    schemaNote,\n    payment{kicker, title, body, linkLabel, pendingNote, url},\n    groups[]{\n      label,\n      fields[]{id, label, kind, placeholder, options, full, required}\n    },\n    submitLabel,\n    submitNote,\n    sent{heading, body, resetLabel}\n  },\n  "contact": *[_id == "contactPage"][0]{\n    kicker,\n    heading{lead, em, rest},\n    aside,\n    directLabel,\n    directNote,\n    audiences[]{value, label, hint, propertyLabel},\n    submitLabel,\n    sentMessage\n  }\n}': SiteContentQueryResult;
+    '{\n  "settings": *[_id == "siteSettings"][0]{\n    brandPrimary,\n    brandSecondary,\n    logo{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n    tagline,\n    conciergeEmail,\n    phone,\n    mailingAddress,\n    contactNote,\n    primaryNav[]{label, href},\n    headerCta{label, href},\n    footerSiteLinks[]{label, href},\n    footerPortalLinks[]{label, href},\n    secureNote,\n    copyright\n  },\n  "home": *[_id == "homePage"][0]{\n    hero{\n      notes,\n      heading{lead, em, rest},\n      image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n      panelText,\n      primaryCta{label, href},\n      secondaryCta{label, href}\n    },\n    intro{kicker, heading{lead, em, rest}, body},\n    pathways{\n      heading,\n      note,\n      items[]{eyebrow, titleTop, titleBottom, body, linkLabel, href, image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n}}\n    },\n    philosophy{\n      kicker,\n      heading{lead, em, rest},\n      image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n      lead,\n      principles[]{term, text}\n    },\n    process{\n      kicker,\n      heading{lead, em, rest},\n      columns[]{label, steps[]{title, detail}}\n    },\n    trust{\n      kicker,\n      stats[]{value, text},\n      image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n      quote,\n      body\n    },\n    cta{heading{lead, em, rest}, links[]{label, href, variant}}\n  },\n  "about": *[_id == "aboutPage"][0]{\n    kicker,\n    heading{lead, em, rest},\n    image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n},\n    aside,\n    values[]{kicker, title, body},\n    closing{heading{lead, em, rest}, links[]{label, href, variant}}\n  },\n  "payments": *[_id == "paymentsPage"][0]{\n    kicker,\n    heading{lead, em, rest},\n    intro,\n    options[]{eyebrow, title, bullets, linkLabel, href, image{\n  "src": asset->url,\n  "alt": alt,\n  "width": asset->metadata.dimensions.width,\n  "height": asset->metadata.dimensions.height\n}, variant}\n  },\n  "titleCompany": *[_id == "titleCompanyPage"][0]{\n    kicker,\n    crossLink{label, href},\n    heading{lead, em, rest},\n    aside,\n    requestTypes[]{term, text},\n    schemaNote,\n    payment{kicker, title, body, linkLabel, pendingNote, url},\n    groups[]{\n      label,\n      fields[]{id, label, kind, placeholder, options, full, required}\n    },\n    submitLabel,\n    submitNote,\n    sent{heading, body, resetLabel}\n  },\n  "contact": *[_id == "contactPage"][0]{\n    kicker,\n    heading{lead, em, rest},\n    aside,\n    directLabel,\n    directNote,\n    audiences[]{value, label, hint, propertyLabel},\n    submitLabel,\n    sentMessage\n  }\n}': SiteContentQueryResult;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

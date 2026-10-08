@@ -49,7 +49,7 @@ const keyed = <T extends object>(items: T[], prefix: string) =>
   items.map((item, i) => ({ ...item, _key: `${prefix}-${i}` }))
 
 async function main() {
-  const { settings, home, about, payments, homeowner, titleCompany, contact } =
+  const { settings, home, about, payments, titleCompany, contact } =
     defaultContent
 
   console.log('Uploading images…')
@@ -149,12 +149,6 @@ async function main() {
         ),
         'opt'
       ),
-    },
-    {
-      _id: 'homeownerPage',
-      _type: 'homeownerPage',
-      ...homeowner,
-      steps: keyed(homeowner.steps, 'step'),
     },
     {
       _id: 'titleCompanyPage',

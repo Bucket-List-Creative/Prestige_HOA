@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { ClosingPacketPayment } from '@/components/ClosingPacketPayment'
 import { Heading } from '@/components/Heading'
 import { TitleCompanyForm } from '@/components/TitleCompanyForm'
 import { getSiteContent } from '@/sanity/lib/content'
+import { SiteLink } from '@/components/SiteLink'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { titleCompany } = await getSiteContent()
@@ -27,13 +27,13 @@ export default async function TitleCompanyPage() {
           }}
         >
           <div className="kicker">{titleCompany.kicker}</div>
-          <Link
+          <SiteLink
             href={titleCompany.crossLink.href}
             className="underline-link"
             style={{ fontSize: 12 }}
           >
             {titleCompany.crossLink.label}
-          </Link>
+          </SiteLink>
         </div>
         <Heading
           as="h1"

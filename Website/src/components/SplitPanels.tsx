@@ -1,10 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRef, type ReactNode } from 'react'
 
 import type { Img } from '@/content/types'
+import { SiteLink } from '@/components/SiteLink'
 
 export type SplitPanel = {
   key: string
@@ -63,7 +63,7 @@ export function SplitPanels({
       }}
     >
       {panels.map((panel, i) => (
-        <Link
+        <SiteLink
           key={panel.key}
           href={panel.href}
           data-split-side=""
@@ -107,7 +107,7 @@ export function SplitPanels({
             style={{ position: 'absolute', inset: 0, background: panel.overlay }}
           />
           {panel.children}
-        </Link>
+        </SiteLink>
       ))}
     </div>
   )

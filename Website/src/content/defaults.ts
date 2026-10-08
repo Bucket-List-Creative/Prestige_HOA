@@ -2,13 +2,13 @@ import type {
   AboutContent,
   ContactContent,
   HomeContent,
-  HomeownerContent,
   Img,
   PaymentsContent,
   SiteContent,
   SiteSettings,
   TitleCompanyContent,
 } from './types'
+import { BUILDIUM_PORTAL_URL } from '@/lib/buildium'
 
 const images = {
   logo: {
@@ -66,7 +66,7 @@ const settings: SiteSettings = {
     { label: 'Title Companies', href: '/title-company' },
     { label: 'Concierge', href: '/contact' },
   ],
-  headerCta: { label: 'Make a Payment', href: '/payments/homeowner' },
+  headerCta: { label: 'Make a Payment', href: BUILDIUM_PORTAL_URL },
   footerSiteLinks: [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
@@ -74,7 +74,7 @@ const settings: SiteSettings = {
     { label: 'Concierge Support', href: '/contact' },
   ],
   footerPortalLinks: [
-    { label: 'Homeowner Payment', href: '/payments/homeowner' },
+    { label: 'Homeowner Payment', href: BUILDIUM_PORTAL_URL },
     { label: 'Title Company Portal', href: '/title-company' },
   ],
   secureNote:
@@ -97,7 +97,7 @@ const home: HomeContent = {
     image: images.hero,
     panelText:
       'Dues, balances and closing requests, handled with the calm of a private concierge and the security of modern payment technology.',
-    primaryCta: { label: "I'm a homeowner", href: '/payments/homeowner' },
+    primaryCta: { label: "I'm a homeowner", href: BUILDIUM_PORTAL_URL },
     secondaryCta: { label: "I'm a title company", href: '/title-company' },
   },
   intro: {
@@ -115,7 +115,7 @@ const home: HomeContent = {
         titleBottom: 'HOA dues.',
         body: 'Annual assessments, account balance, payment history.',
         linkLabel: 'Make an HOA payment',
-        href: '/payments/homeowner',
+        href: BUILDIUM_PORTAL_URL,
         image: images.homeowner,
       },
       {
@@ -215,7 +215,7 @@ const home: HomeContent = {
       rest: 'refined experience.',
     },
     links: [
-      { label: 'Make a Payment', href: '/payments/homeowner', variant: 'primary' },
+      { label: 'Make a Payment', href: BUILDIUM_PORTAL_URL, variant: 'primary' },
       { label: 'Title Company Portal', href: '/title-company', variant: 'secondary' },
       { label: 'Contact Us', href: '/contact', variant: 'ghost' },
     ],
@@ -282,7 +282,7 @@ const payments: PaymentsContent = {
         'Property and account information',
       ],
       linkLabel: 'Continue as Homeowner',
-      href: '/payments/homeowner',
+      href: BUILDIUM_PORTAL_URL,
       image: images.homeowner,
       variant: 'primary',
     },
@@ -302,45 +302,11 @@ const payments: PaymentsContent = {
   ],
 }
 
-const homeowner: HomeownerContent = {
-  kicker: 'Homeowner · Payment',
-  crossLink: {
-    label: 'Not a homeowner? Title company portal →',
-    href: '/title-company',
-  },
-  heading: { lead: 'Pay your', em: 'dues.', rest: '' },
-  steps: [
-    { title: 'Property / Account', detail: 'Find your property.' },
-    { title: 'Review', detail: 'Confirm the assessment.' },
-    { title: 'Secure Payment', detail: 'Complete with our payment partner.' },
-  ],
-  step1: {
-    heading: 'Identify your property.',
-    submitLabel: 'Continue to review',
-  },
-  step2: {
-    heading: 'Review your assessment.',
-    pendingNote: 'Loaded from account system once connected',
-    integrationNote: 'Integration point: AppFolio / account system (pending)',
-    continueLabel: 'Continue to secure payment',
-  },
-  step3: {
-    heading: 'Complete your payment securely.',
-    body: "You'll finish on our encrypted payment partner's page. Prestige HOA never stores card or bank details. Your receipt arrives at",
-    cardKicker: 'Secure handoff',
-    cardTitle: 'Redirecting to payment partner',
-    cardBody:
-      'Stripe or AppFolio payment destination (URL to be supplied). This button will open the approved payment page in a new tab.',
-    continueLabel: 'Continue to secure payment ↗',
-    integrationNote: 'Integration point: Stripe / AppFolio (pending URL)',
-  },
-}
-
 const titleCompany: TitleCompanyContent = {
   kicker: 'Title Company · Portal',
   crossLink: {
     label: 'Homeowner? Make a payment →',
-    href: '/payments/homeowner',
+    href: BUILDIUM_PORTAL_URL,
   },
   heading: { lead: 'Request HOA', em: 'information.', rest: '' },
   aside:
@@ -501,7 +467,6 @@ export const defaultContent: SiteContent = {
   home,
   about,
   payments,
-  homeowner,
   titleCompany,
   contact,
 }

@@ -51,7 +51,6 @@ Every document is a singleton, one per site:
 | Home | `/` |
 | About | `/about` |
 | Payments | `/payments` |
-| Homeowner payment | `/payments/homeowner` |
 | Title company portal | `/title-company` |
 | Concierge support | `/contact` |
 

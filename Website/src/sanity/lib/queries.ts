@@ -80,24 +80,6 @@ export const siteContentQuery = defineQuery(`{
     intro,
     options[]{eyebrow, title, bullets, linkLabel, href, image${img}, variant}
   },
-  "homeowner": *[_id == "homeownerPage"][0]{
-    kicker,
-    crossLink{label, href},
-    heading{lead, em, rest},
-    steps[]{title, detail},
-    step1{heading, submitLabel},
-    step2{heading, pendingNote, integrationNote, continueLabel},
-    step3{
-      heading,
-      body,
-      cardKicker,
-      cardTitle,
-      cardBody,
-      continueLabel,
-      integrationNote,
-      paymentUrl
-    }
-  },
   "titleCompany": *[_id == "titleCompanyPage"][0]{
     kicker,
     crossLink{label, href},

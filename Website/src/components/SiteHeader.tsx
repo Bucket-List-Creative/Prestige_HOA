@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { Brand } from './Brand'
 import type { SiteSettings } from '@/content/types'
+import { SiteLink } from '@/components/SiteLink'
 
 export function SiteHeader({ settings }: { settings: SiteSettings }) {
   const pathname = usePathname()
@@ -42,23 +42,23 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
         }}
       >
         {settings.primaryNav.map((item) => (
-          <Link
+          <SiteLink
             key={item.href}
             href={item.href}
             className="nav-link"
             aria-current={pathname === item.href ? 'page' : undefined}
           >
             {item.label}
-          </Link>
+          </SiteLink>
         ))}
       </nav>
-      <Link
+      <SiteLink
         href={settings.headerCta.href}
         className="btn btn-primary"
         style={{ justifyContent: 'flex-start', padding: '10px 18px' }}
       >
         {settings.headerCta.label}
-      </Link>
+      </SiteLink>
     </header>
   )
 }

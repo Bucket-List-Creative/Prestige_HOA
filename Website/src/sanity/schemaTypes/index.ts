@@ -3,7 +3,6 @@ import { type SchemaTypeDefinition } from 'sanity'
 import { aboutPage } from './documents/aboutPage'
 import { contactPage } from './documents/contactPage'
 import { homePage } from './documents/homePage'
-import { homeownerPage } from './documents/homeownerPage'
 import { paymentsPage } from './documents/paymentsPage'
 import { siteSettings } from './documents/siteSettings'
 import { titleCompanyPage } from './documents/titleCompanyPage'
@@ -18,7 +17,6 @@ export const singletonTypes = [
   'homePage',
   'aboutPage',
   'paymentsPage',
-  'homeownerPage',
   'titleCompanyPage',
   'contactPage',
 ] as const
@@ -29,7 +27,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     homePage,
     aboutPage,
     paymentsPage,
-    homeownerPage,
     titleCompanyPage,
     contactPage,
     ...objectTypes,

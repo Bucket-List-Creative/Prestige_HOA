@@ -1,10 +1,10 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { CtaLinks } from '@/components/CtaLinks'
 import { Heading } from '@/components/Heading'
 import { SplitPanels } from '@/components/SplitPanels'
 import { getSiteContent } from '@/sanity/lib/content'
+import { SiteLink } from '@/components/SiteLink'
 
 export default async function HomePage() {
   const { home, settings } = await getSiteContent()
@@ -169,7 +169,7 @@ export default async function HomePage() {
               {hero.panelText}
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Link
+              <SiteLink
                 href={hero.primaryCta.href}
                 className="btn btn-primary"
                 style={{
@@ -182,8 +182,8 @@ export default async function HomePage() {
                 }}
               >
                 {hero.primaryCta.label}
-              </Link>
-              <Link
+              </SiteLink>
+              <SiteLink
                 href={hero.secondaryCta.href}
                 className="btn btn-secondary"
                 style={{
@@ -196,7 +196,7 @@ export default async function HomePage() {
                 }}
               >
                 {hero.secondaryCta.label}
-              </Link>
+              </SiteLink>
             </div>
           </div>
         </div>

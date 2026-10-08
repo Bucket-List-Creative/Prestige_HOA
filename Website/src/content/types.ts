@@ -132,31 +132,6 @@ export type PaymentsContent = {
   }[]
 }
 
-export type HomeownerContent = {
-  kicker: string
-  crossLink: Link
-  heading: SplitHeading
-  steps: { title: string; detail: string }[]
-  step1: { heading: string; submitLabel: string }
-  step2: {
-    heading: string
-    pendingNote: string
-    integrationNote: string
-    continueLabel: string
-  }
-  step3: {
-    heading: string
-    body: string
-    cardKicker: string
-    cardTitle: string
-    cardBody: string
-    continueLabel: string
-    integrationNote: string
-    /** When set, the final button becomes a live link to the payment partner. */
-    paymentUrl?: string
-  }
-}
-
 export type TitleFormField = {
   id: string
   label: string
@@ -210,7 +185,6 @@ export type SiteContent = {
   home: HomeContent
   about: AboutContent
   payments: PaymentsContent
-  homeowner: HomeownerContent
   titleCompany: TitleCompanyContent
   contact: ContactContent
 }

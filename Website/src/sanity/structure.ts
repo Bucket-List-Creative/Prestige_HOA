@@ -6,7 +6,6 @@ const singletons: { id: string; title: string }[] = [
   { id: 'homePage', title: 'Home' },
   { id: 'aboutPage', title: 'About' },
   { id: 'paymentsPage', title: 'Payments' },
-  { id: 'homeownerPage', title: 'Homeowner payment' },
   { id: 'titleCompanyPage', title: 'Title company portal' },
   { id: 'contactPage', title: 'Concierge support' },
 ]

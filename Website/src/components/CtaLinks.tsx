@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import type { CSSProperties, HTMLAttributes } from 'react'
 
 import type { CtaLink } from '@/content/types'
+import { SiteLink } from '@/components/SiteLink'
 
 const base: CSSProperties = {
   justifyContent: 'flex-start',
@@ -52,14 +52,14 @@ export function CtaLinks({
                     textUnderlineOffset: 6,
                   }
           return (
-            <Link key={link.href + link.label} href={link.href} className="btn" style={onAccentStyle}>
+            <SiteLink key={link.href + link.label} href={link.href} className="btn" style={onAccentStyle}>
               {link.label}
-            </Link>
+            </SiteLink>
           )
         }
 
         return (
-          <Link
+          <SiteLink
             key={link.href + link.label}
             href={link.href}
             className={
@@ -68,7 +68,7 @@ export function CtaLinks({
             style={base}
           >
             {link.label}
-          </Link>
+          </SiteLink>
         )
       })}
     </div>
