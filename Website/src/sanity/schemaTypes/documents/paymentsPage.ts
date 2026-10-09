@@ -44,6 +44,7 @@ export const paymentsPage = defineType({
       ],
       validation: (rule) => rule.max(2),
     }),
+    defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
   ],
   preview: { prepare: () => ({ title: 'Payments page' }) },
 })

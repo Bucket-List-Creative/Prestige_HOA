@@ -37,6 +37,7 @@ export const aboutPage = defineType({
         }),
       ],
     }),
+    defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
   ],
   preview: { prepare: () => ({ title: 'About page' }) },
 })

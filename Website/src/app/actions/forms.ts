@@ -3,35 +3,14 @@
 import { verifyCaptcha } from '@/lib/captcha'
 import { HONEYPOT, type FormState } from '@/lib/form-state'
 import { submitToJotform, type JotformAnswer } from '@/lib/jotform'
+import { AUDIENCE_LABELS, TITLE_FIELDS, TITLE_REQUIRED } from '@/lib/jotform-fields'
+import { getSiteContent } from '@/sanity/lib/content'
 
 /** "Prestige HOA – Title Company Request" in Jotform. */
 const TITLE_FORM_ID = '262775563074061'
 
-/** Website field id (from Sanity) → Jotform question id. */
-const TITLE_FIELDS: Record<string, string> = {
-  'tc-company': '2',
-  'tc-file': '3',
-  'tc-contact': '4',
-  'tc-email': '5',
-  'tc-phone': '6',
-  'tc-address': '7',
-  'tc-owner': '8',
-  'tc-buyer': '9',
-  'tc-closing': '10',
-  'tc-request': '11',
-  'tc-notes': '12',
-}
-const TITLE_REQUIRED = ['tc-company', 'tc-contact', 'tc-email', 'tc-address']
-
 /** "Prestige HOA – Concierge Contact" in Jotform. */
 const CONTACT_FORM_ID = '262775174789072'
-
-/** Radio values on the site → the option labels in Jotform. */
-const AUDIENCE_LABELS: Record<string, string> = {
-  homeowner: 'Homeowner',
-  title: 'Title Company',
-  general: 'General Inquiry',
-}
 
 const MAX_LENGTH = 5000
 
@@ -54,16 +33,15 @@ async function screen(data: FormData): Promise<FormState | null> {
   // Pretend success so the bot learns nothing.
   if (text(data, HONEYPOT)) return { status: 'sent' }
   if (!(await verifyCaptcha(data.get('h-captcha-response')))) {
-    return { status: 'error', message: 'Please complete the CAPTCHA and try again.' }
+    return failure((await messages()).captcha)
   }
   return null
 }
 
-const failed: FormState = {
-  status: 'error',
-  message:
-    'Something went wrong sending your request. Please try again, or call us directly.',
-}
+/** The editable error copy from Site settings → Form messages. */
+const messages = async () => (await getSiteContent()).settings.formMessages
+
+const failure = (message: string): FormState => ({ status: 'error', message })
 
 export async function submitTitleRequest(
   _prev: FormState,
@@ -73,10 +51,10 @@ export async function submitTitleRequest(
   if (blocked) return blocked
 
   if (TITLE_REQUIRED.some((key) => !text(data, key))) {
-    return { status: 'error', message: 'Please fill in all required fields.' }
+    return failure((await messages()).required)
   }
   if (!isEmail(text(data, 'tc-email'))) {
-    return { status: 'error', message: 'Please enter a valid email address.' }
+    return failure((await messages()).invalidEmail)
   }
 
   const answers: Record<string, JotformAnswer> = {}
@@ -112,7 +90,7 @@ export async function submitTitleRequest(
     return { status: 'sent' }
   } catch (error) {
     console.error('[forms] title request:', error)
-    return failed
+    return failure((await messages()).failed)
   }
 }
 
@@ -129,10 +107,10 @@ export async function submitContact(
   const message = text(data, 'message')
 
   if (!name || !email || !message) {
-    return { status: 'error', message: 'Please fill in all required fields.' }
+    return failure((await messages()).required)
   }
   if (!isEmail(email)) {
-    return { status: 'error', message: 'Please enter a valid email address.' }
+    return failure((await messages()).invalidEmail)
   }
 
   try {
@@ -146,6 +124,6 @@ export async function submitContact(
     return { status: 'sent' }
   } catch (error) {
     console.error('[forms] contact:', error)
-    return failed
+    return failure((await messages()).failed)
   }
 }

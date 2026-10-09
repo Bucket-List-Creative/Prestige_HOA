@@ -8,6 +8,8 @@ export const siteSettings = defineType({
     { name: 'brand', title: 'Brand', default: true },
     { name: 'nav', title: 'Navigation' },
     { name: 'footer', title: 'Footer' },
+    { name: 'forms', title: 'Form messages' },
+    { name: 'notFound', title: 'Page not found' },
   ],
   fields: [
     defineField({
@@ -87,6 +89,44 @@ export const siteSettings = defineType({
       name: 'copyright',
       type: 'string',
       group: 'footer',
+    }),
+    defineField({
+      name: 'footerHeadings',
+      title: 'Footer — Column headings',
+      type: 'object',
+      options: { columns: 2 },
+      group: 'footer',
+      fields: [
+        defineField({ name: 'site', type: 'string' }),
+        defineField({ name: 'portals', type: 'string' }),
+        defineField({ name: 'contact', type: 'string' }),
+        defineField({ name: 'secure', type: 'string' }),
+      ],
+    }),
+    defineField({
+      name: 'formMessages',
+      title: 'Form error messages',
+      description: 'Shown on the title company and contact forms.',
+      type: 'object',
+      group: 'forms',
+      fields: [
+        defineField({ name: 'required', title: 'Missing required fields', type: 'string' }),
+        defineField({ name: 'invalidEmail', title: 'Invalid email', type: 'string' }),
+        defineField({ name: 'captcha', title: 'CAPTCHA not completed', type: 'string' }),
+        defineField({ name: 'failed', title: 'Sending failed', type: 'text', rows: 2 }),
+      ],
+    }),
+    defineField({
+      name: 'notFound',
+      title: 'Page not found (404)',
+      type: 'object',
+      group: 'notFound',
+      fields: [
+        defineField({ name: 'kicker', type: 'string' }),
+        defineField({ name: 'heading', type: 'splitHeading' }),
+        defineField({ name: 'body', type: 'text', rows: 2 }),
+        defineField({ name: 'link', type: 'link' }),
+      ],
     }),
   ],
   preview: { prepare: () => ({ title: 'Site settings' }) },

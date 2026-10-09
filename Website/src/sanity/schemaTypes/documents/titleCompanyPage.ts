@@ -1,5 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
+import { isMapped, TITLE_FIELDS, TITLE_REQUIRED } from '../../../lib/jotform-fields'
+
 export const titleCompanyPage = defineType({
   name: 'titleCompanyPage',
   title: 'Title company portal',
@@ -7,6 +9,7 @@ export const titleCompanyPage = defineType({
   groups: [
     { name: 'intro', title: 'Intro', default: true },
     { name: 'form', title: 'Request form' },
+    { name: 'seo', title: 'SEO' },
   ],
   fields: [
     defineField({ name: 'kicker', type: 'string', group: 'intro' }),
@@ -55,6 +58,15 @@ export const titleCompanyPage = defineType({
       title: 'Field groups',
       type: 'array',
       group: 'form',
+      validation: (rule) =>
+        rule.custom((groups?: { fields?: { id?: string }[] }[]) => {
+          if (!groups?.length) return true
+          const ids = new Set(groups.flatMap((g) => g.fields ?? []).map((f) => f.id))
+          const missing = TITLE_REQUIRED.filter((id) => !ids.has(id))
+          return missing.length
+            ? `The form can't be submitted without these fields: ${missing.join(', ')}`
+            : true
+        }),
       of: [
         defineArrayMember({
           type: 'object',
@@ -69,8 +81,10 @@ export const titleCompanyPage = defineType({
                   fields: [
                     defineField({
                       name: 'id',
-                      description: 'Unique field name, e.g. tc-company.',
+                      description:
+                        'Unique field name, e.g. tc-company. Locked on fields that feed a Jotform question; new fields are added to the Notes answer.',
                       type: 'string',
+                      readOnly: ({ value }) => isMapped(TITLE_FIELDS, value),
                       validation: (rule) => rule.required(),
                     }),
                     defineField({
@@ -135,6 +149,7 @@ export const titleCompanyPage = defineType({
         defineField({ name: 'resetLabel', type: 'string' }),
       ],
     }),
+    defineField({ name: 'seo', title: 'SEO', type: 'seo', group: 'seo' }),
   ],
   preview: { prepare: () => ({ title: 'Title company portal' }) },
 })

@@ -28,9 +28,13 @@ export const siteContentQuery = defineQuery(`{
     footerSiteLinks[]{label, href},
     footerPortalLinks[]{label, href},
     secureNote,
-    copyright
+    copyright,
+    footerHeadings{site, portals, contact, secure},
+    formMessages{required, invalidEmail, captcha, failed},
+    notFound{kicker, heading{lead, em, rest}, body, link{label, href}}
   },
   "home": *[_id == "homePage"][0]{
+    seo{title, description, image${img}},
     hero{
       notes,
       heading{lead, em, rest},
@@ -67,6 +71,7 @@ export const siteContentQuery = defineQuery(`{
     cta{heading{lead, em, rest}, links[]{label, href, variant}}
   },
   "about": *[_id == "aboutPage"][0]{
+    seo{title, description, image${img}},
     kicker,
     heading{lead, em, rest},
     image${img},
@@ -75,12 +80,14 @@ export const siteContentQuery = defineQuery(`{
     closing{heading{lead, em, rest}, links[]{label, href, variant}}
   },
   "payments": *[_id == "paymentsPage"][0]{
+    seo{title, description, image${img}},
     kicker,
     heading{lead, em, rest},
     intro,
     options[]{eyebrow, title, bullets, linkLabel, href, image${img}, variant}
   },
   "titleCompany": *[_id == "titleCompanyPage"][0]{
+    seo{title, description, image${img}},
     kicker,
     crossLink{label, href},
     heading{lead, em, rest},
@@ -97,12 +104,14 @@ export const siteContentQuery = defineQuery(`{
     sent{heading, body, resetLabel}
   },
   "contact": *[_id == "contactPage"][0]{
+    seo{title, description, image${img}},
     kicker,
     heading{lead, em, rest},
     aside,
     directLabel,
     directNote,
     audiences[]{value, label, hint, propertyLabel},
+    fieldLabels{who, name, email, message},
     submitLabel,
     sentMessage
   }

@@ -58,8 +58,8 @@ export function ContactForm({ content }: { content: ContactContent }) {
       }}
     >
       <div className="field">
-        <label>I am a</label>
-        <div className="seg" role="radiogroup" aria-label="I am a">
+        <label>{content.fieldLabels.who}</label>
+        <div className="seg" role="radiogroup" aria-label={content.fieldLabels.who}>
           {content.audiences.map((item) => (
             <label key={item.value} className="seg-opt">
               <input
@@ -90,7 +90,7 @@ export function ContactForm({ content }: { content: ContactContent }) {
         }}
       >
         <div className="field">
-          <label htmlFor="c-name">Name</label>
+          <label htmlFor="c-name">{content.fieldLabels.name}</label>
           <input
             className="input"
             id="c-name"
@@ -100,7 +100,7 @@ export function ContactForm({ content }: { content: ContactContent }) {
           />
         </div>
         <div className="field">
-          <label htmlFor="c-email">Email</label>
+          <label htmlFor="c-email">{content.fieldLabels.email}</label>
           <input
             className="input"
             id="c-email"
@@ -123,7 +123,7 @@ export function ContactForm({ content }: { content: ContactContent }) {
       </div>
 
       <div className="field">
-        <label htmlFor="c-msg">Message</label>
+        <label htmlFor="c-msg">{content.fieldLabels.message}</label>
         <textarea
           className="input"
           id="c-msg"

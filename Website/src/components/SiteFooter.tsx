@@ -44,8 +44,8 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           {settings.tagline}
         </span>
       </div>
-      <FooterNav label="Site" links={settings.footerSiteLinks} />
-      <FooterNav label="Portals" links={settings.footerPortalLinks} />
+      <FooterNav label={settings.footerHeadings.site} links={settings.footerSiteLinks} />
+      <FooterNav label={settings.footerHeadings.portals} links={settings.footerPortalLinks} />
       <div
         style={{
           display: 'flex',
@@ -54,13 +54,16 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           fontWeight: 300,
         }}
       >
-        <span className="eyebrow">Contact</span>
+        <span className="eyebrow">{settings.footerHeadings.contact}</span>
         <a href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}>
           {settings.phone}
         </a>
         <address style={{ fontStyle: 'normal', whiteSpace: 'pre-line' }}>
           {settings.mailingAddress}
         </address>
+        {settings.contactNote ? (
+          <span style={{ opacity: 0.6 }}>{settings.contactNote}</span>
+        ) : null}
       </div>
       <div
         style={{
@@ -70,7 +73,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           fontWeight: 300,
         }}
       >
-        <span className="eyebrow">Secure</span>
+        <span className="eyebrow">{settings.footerHeadings.secure}</span>
         <span>{settings.secureNote}</span>
         <span style={{ opacity: 0.6, marginTop: 8 }}>{settings.copyright}</span>
       </div>

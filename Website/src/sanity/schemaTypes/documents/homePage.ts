@@ -12,6 +12,7 @@ export const homePage = defineType({
     { name: 'process', title: 'Process' },
     { name: 'trust', title: 'Trust' },
     { name: 'cta', title: 'Closing CTA' },
+    { name: 'seo', title: 'SEO' },
   ],
   fields: [
     defineField({
@@ -162,6 +163,7 @@ export const homePage = defineType({
         }),
       ],
     }),
+    defineField({ name: 'seo', title: 'SEO', type: 'seo', group: 'seo' }),
   ],
   preview: { prepare: () => ({ title: 'Home page' }) },
 })

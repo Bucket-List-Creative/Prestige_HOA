@@ -125,7 +125,38 @@ export const step = defineType({
   },
 })
 
+/** Search and social sharing. Empty fields fall back to the page's own copy. */
+export const seo = defineType({
+  name: 'seo',
+  title: 'SEO',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Page title',
+      description: 'Shown in the browser tab and search results.',
+      type: 'string',
+      validation: (rule) => rule.max(60).warning('Search results cut titles off after about 60 characters.'),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Meta description',
+      description: 'The summary under the title in search results.',
+      type: 'text',
+      rows: 3,
+      validation: (rule) => rule.max(160).warning('Search results cut descriptions off after about 160 characters.'),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Social share image',
+      description: 'Shown when the page is shared. 1200 × 630 works best.',
+      type: 'figure',
+    }),
+  ],
+})
+
 export const objectTypes = [
+  seo,
   splitHeading,
   link,
   ctaLink,

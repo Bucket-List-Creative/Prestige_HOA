@@ -80,13 +80,33 @@ const settings: SiteSettings = {
   secureNote:
     'Payments processed by an encrypted payment partner. Card details are never stored by Prestige HOA.',
   copyright: '© 2026 Prestige HOA',
-  conciergeEmail: 'concierge@prestigehoa.example',
+  conciergeEmail: 'concierge@prestigehoa.com',
   phone: '636-399-1058',
   mailingAddress: 'Prestige HOA\nPO Box 163\nChesterfield, MO 63006',
   contactNote: '',
+  footerHeadings: {
+    site: 'Site',
+    portals: 'Portals',
+    contact: 'Contact',
+    secure: 'Secure',
+  },
+  formMessages: {
+    required: 'Please fill in all required fields.',
+    invalidEmail: 'Please enter a valid email address.',
+    captcha: 'Please complete the CAPTCHA and try again.',
+    failed:
+      'Something went wrong sending your request. Please try again, or call us directly.',
+  },
+  notFound: {
+    kicker: 'Page not found',
+    heading: { lead: 'This page has', em: 'moved on.', rest: '' },
+    body: "The page you were looking for isn't here. Let's get you back home.",
+    link: { label: 'Return home', href: '/' },
+  },
 }
 
 const home: HomeContent = {
+  seo: { title: '', description: '' },
   hero: {
     notes: [
       'Premium HOA management.\nConcierge-level service.',
@@ -223,6 +243,7 @@ const home: HomeContent = {
 }
 
 const about: AboutContent = {
+  seo: { title: 'About', description: '' },
   kicker: 'About Prestige HOA',
   heading: {
     lead: 'Better management creates',
@@ -268,6 +289,7 @@ const about: AboutContent = {
 }
 
 const payments: PaymentsContent = {
+  seo: { title: 'Payments', description: '' },
   kicker: 'Payments',
   heading: { lead: 'Choose your', em: 'experience.', rest: '' },
   intro:
@@ -303,6 +325,7 @@ const payments: PaymentsContent = {
 }
 
 const titleCompany: TitleCompanyContent = {
+  seo: { title: 'Title Company Portal', description: '' },
   kicker: 'Title Company · Portal',
   crossLink: {
     label: 'Homeowner? Make a payment →',
@@ -317,7 +340,7 @@ const titleCompany: TitleCompanyContent = {
     { term: 'Status letter', text: 'Included' },
     { term: 'Closing documentation', text: 'Included' },
   ],
-  schemaNote: 'Field schema configurable, pending client confirmation',
+  schemaNote: '',
   payment: {
     kicker: 'Closing packet fee',
     title: 'Pay securely online.',
@@ -431,6 +454,7 @@ const titleCompany: TitleCompanyContent = {
 }
 
 const contact: ContactContent = {
+  seo: { title: 'Concierge Support', description: '' },
   kicker: 'Concierge Support',
   heading: { lead: 'How may we', em: 'help?', rest: '' },
   aside:
@@ -457,6 +481,12 @@ const contact: ContactContent = {
       propertyLabel: 'Community or subject (optional)',
     },
   ],
+  fieldLabels: {
+    who: 'I am a',
+    name: 'Name',
+    email: 'Email',
+    message: 'Message',
+  },
   submitLabel: 'Send to concierge',
   sentMessage:
     'Received. A concierge will reply shortly.',

@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 
 import { ContactForm } from '@/components/ContactForm'
 import { Heading } from '@/components/Heading'
+import { pageMetadata } from '@/lib/metadata'
 import { getSiteContent } from '@/sanity/lib/content'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { contact } = await getSiteContent()
-  return { title: 'Concierge Support', description: contact.aside }
+  return pageMetadata(contact.seo, '/contact', contact.aside)
 }
 
 export default async function ContactPage() {

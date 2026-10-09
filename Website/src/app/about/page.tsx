@@ -3,11 +3,12 @@ import type { Metadata } from 'next'
 
 import { CtaLinks } from '@/components/CtaLinks'
 import { Heading } from '@/components/Heading'
+import { pageMetadata } from '@/lib/metadata'
 import { getSiteContent } from '@/sanity/lib/content'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { about } = await getSiteContent()
-  return { title: 'About', description: about.aside }
+  return pageMetadata(about.seo, '/about', about.aside)
 }
 
 export default async function AboutPage() {

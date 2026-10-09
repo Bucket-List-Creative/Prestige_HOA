@@ -3,12 +3,13 @@ import type { Metadata } from 'next'
 import { ClosingPacketPayment } from '@/components/ClosingPacketPayment'
 import { Heading } from '@/components/Heading'
 import { TitleCompanyForm } from '@/components/TitleCompanyForm'
+import { pageMetadata } from '@/lib/metadata'
 import { getSiteContent } from '@/sanity/lib/content'
 import { SiteLink } from '@/components/SiteLink'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { titleCompany } = await getSiteContent()
-  return { title: 'Title Company Portal', description: titleCompany.aside }
+  return pageMetadata(titleCompany.seo, '/title-company', titleCompany.aside)
 }
 
 export default async function TitleCompanyPage() {
@@ -90,9 +91,11 @@ export default async function TitleCompanyPage() {
             ))}
           </div>
           <ClosingPacketPayment payment={titleCompany.payment} />
-          <span className="tag tag-outline" style={{ alignSelf: 'flex-start' }}>
-            {titleCompany.schemaNote}
-          </span>
+          {titleCompany.schemaNote ? (
+            <span className="tag tag-outline" style={{ alignSelf: 'flex-start' }}>
+              {titleCompany.schemaNote}
+            </span>
+          ) : null}
         </aside>
 
         <TitleCompanyForm content={titleCompany} />

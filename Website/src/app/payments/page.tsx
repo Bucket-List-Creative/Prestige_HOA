@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 
 import { Heading } from '@/components/Heading'
 import { SplitPanels } from '@/components/SplitPanels'
+import { pageMetadata } from '@/lib/metadata'
 import { getSiteContent } from '@/sanity/lib/content'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { payments } = await getSiteContent()
-  return { title: 'Payments', description: payments.intro }
+  return pageMetadata(payments.seo, '/payments', payments.intro)
 }
 
 export default async function PaymentsPage() {

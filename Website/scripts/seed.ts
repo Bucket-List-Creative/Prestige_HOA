@@ -72,10 +72,14 @@ async function main() {
       footerPortalLinks: keyed(settings.footerPortalLinks, 'fport'),
       secureNote: settings.secureNote,
       copyright: settings.copyright,
+      footerHeadings: settings.footerHeadings,
+      formMessages: settings.formMessages,
+      notFound: settings.notFound,
     },
     {
       _id: 'homePage',
       _type: 'homePage',
+      seo: home.seo,
       hero: {
         notes: home.hero.notes,
         heading: home.hero.heading,
@@ -137,6 +141,7 @@ async function main() {
     {
       _id: 'paymentsPage',
       _type: 'paymentsPage',
+      seo: payments.seo,
       kicker: payments.kicker,
       heading: payments.heading,
       intro: payments.intro,

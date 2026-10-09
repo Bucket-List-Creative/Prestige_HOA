@@ -28,6 +28,13 @@ export type SplitHeading = {
   rest: string
 }
 
+/** Search and sharing metadata. Empty strings fall back to the page's copy. */
+export type Seo = {
+  title: string
+  description: string
+  image?: Img
+}
+
 export type SiteSettings = {
   brandPrimary: string
   brandSecondary: string
@@ -44,6 +51,19 @@ export type SiteSettings = {
   /** One line per row, e.g. name, PO box, city/state/ZIP. */
   mailingAddress: string
   contactNote: string
+  footerHeadings: { site: string; portals: string; contact: string; secure: string }
+  formMessages: {
+    required: string
+    invalidEmail: string
+    captcha: string
+    failed: string
+  }
+  notFound: {
+    kicker: string
+    heading: SplitHeading
+    body: string
+    link: Link
+  }
 }
 
 export type HomePathway = {
@@ -62,6 +82,7 @@ export type ProcessColumn = {
 }
 
 export type HomeContent = {
+  seo: Seo
   hero: {
     notes: string[]
     heading: SplitHeading
@@ -106,6 +127,7 @@ export type HomeContent = {
 }
 
 export type AboutContent = {
+  seo: Seo
   kicker: string
   heading: SplitHeading
   image: Img
@@ -118,6 +140,7 @@ export type AboutContent = {
 }
 
 export type PaymentsContent = {
+  seo: Seo
   kicker: string
   heading: SplitHeading
   intro: string
@@ -143,6 +166,7 @@ export type TitleFormField = {
 }
 
 export type TitleCompanyContent = {
+  seo: Seo
   kicker: string
   crossLink: Link
   heading: SplitHeading
@@ -165,6 +189,7 @@ export type TitleCompanyContent = {
 }
 
 export type ContactContent = {
+  seo: Seo
   kicker: string
   heading: SplitHeading
   aside: string
@@ -176,6 +201,7 @@ export type ContactContent = {
     hint: string
     propertyLabel: string
   }[]
+  fieldLabels: { who: string; name: string; email: string; message: string }
   submitLabel: string
   sentMessage: string
 }

@@ -4,6 +4,7 @@ import { Archivo } from 'next/font/google'
 import { Motion } from '@/components/Motion'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
+import { SITE_URL } from '@/lib/site'
 import { getSiteContent } from '@/sanity/lib/content'
 import { SanityLive } from '@/sanity/lib/live'
 
@@ -20,8 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getSiteContent()
   const name = `${settings.brandPrimary} ${settings.brandSecondary}`
   return {
+    metadataBase: new URL(SITE_URL),
     title: { default: name, template: `%s | ${name}` },
     description: settings.tagline,
+    openGraph: { siteName: name, type: 'website', locale: 'en_US' },
   }
 }
 

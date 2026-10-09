@@ -1,10 +1,17 @@
 import Image from 'next/image'
+import type { Metadata } from 'next'
 
 import { CtaLinks } from '@/components/CtaLinks'
 import { Heading } from '@/components/Heading'
 import { SplitPanels } from '@/components/SplitPanels'
+import { pageMetadata } from '@/lib/metadata'
 import { getSiteContent } from '@/sanity/lib/content'
 import { SiteLink } from '@/components/SiteLink'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { home, settings } = await getSiteContent()
+  return pageMetadata(home.seo, '/', settings.tagline)
+}
 
 export default async function HomePage() {
   const { home, settings } = await getSiteContent()
