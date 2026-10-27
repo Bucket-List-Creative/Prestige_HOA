@@ -117,7 +117,10 @@ const home: HomeContent = {
     image: images.hero,
     panelText:
       'Dues, balances and closing requests, handled with the calm of a private concierge and the security of modern payment technology.',
-    primaryCta: { label: "I'm a homeowner", href: BUILDIUM_PORTAL_URL },
+    primaryCta: {
+      label: "I'm a homeowner",
+      href: 'https://prestige-hoa.managebuilding.com/Resident/portal/login',
+    },
     secondaryCta: { label: "I'm a title company", href: '/title-company' },
   },
   intro: {
